@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Graph</title>
+    <style>
+        body {
+            font-family: Calibri, sans-serif;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body style="background-color: white;">
+    <h2>Routing Algorithm Implementation: Dijkstra's Algorithm</h2>
+    <p>This web application was created to help users visualize and identify </p>
+    <p>the shortest weighted path in a graph, also known as Dijkstra's Algorithm.</p>
+    <p>Use is very simple. Select a source node from the dropdown menu, and</p>
+    <p>a destination node from the second dropdown menu, then press Go!</p>
+    <p>The output box will then display the best route of travel between the </p>
+    <p>two selected nodes and how it got there.</p>
+    <form method="POST"> 
+        <h4>Select Source Node:</h4>
+        <select name="source">
+            <option value="Server 1" {% if source == "Server 1" %}selected{% endif %}>Server 1</option>
+            <option value="Server 2" {% if source == "Server 2" %}selected{% endif %}>Server 2</option>
+            <option value="Server 3" {% if source == "Server 3" %}selected{% endif %}>Server 3</option>
+            <option value="Server 4" {% if source == "Server 4" %}selected{% endif %}>Server 4</option>
+            <option value="Client 1" {% if source == "Client 1" %}selected{% endif %}>Client 1</option>
+            <option value="Client 2" {% if source == "Client 2" %}selected{% endif %}>Client 2</option>
+            <option value="Client 3" {% if source == "Client 3" %}selected{% endif %}>Client 3</option>
+            <option value="Client 4" {% if source == "Client 4" %}selected{% endif %}>Client 4</option>
+            <option value="Client 5" {% if source == "Client 5" %}selected{% endif %}>Client 5</option>
+            <option value="Client 6" {% if source == "Client 6" %}selected{% endif %}>Client 6</option>
+        </select>
+        <h4>Select Destination Node:</h4>
+        <select name="destination">
+            <option value="Server 1" {% if destination == "Server 1" %}selected{% endif %}>Server 1</option>
+            <option value="Server 2" {% if destination == "Server 2" %}selected{% endif %}>Server 2</option>
+            <option value="Server 3" {% if destination == "Server 3" %}selected{% endif %}>Server 3</option>
+            <option value="Server 4" {% if destination == "Server 4" %}selected{% endif %}>Server 4</option>
+            <option value="Client 1" {% if destination == "Client 1" %}selected{% endif %}>Client 1</option>
+            <option value="Client 2" {% if destination == "Client 2" %}selected{% endif %}>Client 2</option>
+            <option value="Client 3" {% if destination == "Client 3" %}selected{% endif %}>Client 3</option>
+            <option value="Client 4" {% if destination == "Client 4" %}selected{% endif %}>Client 4</option>
+            <option value="Client 5" {% if destination == "Client 5" %}selected{% endif %}>Client 5</option>
+            <option value="Client 6" {% if destination == "Client 6" %}selected{% endif %}>Client 6</option>
+        </select>
+        <br><br>
+        <button type="submit">Go!</button>
+        <br><br>
+        <h4>Output:</h4>
+        <textarea id="outputBox" rows="4" cols="50" placeholder="The shortest path, using Dijkstra's Algorithm =, will show here!" readonly style="pointer-events: none;"></textarea>
+        <script>
+            function showOutput() {
+                document.getElementById('outputBox').value = "Identifying the best path...";
+            }
+        </script>
+        </select>
+    </form>
+    <div style="position: absolute; top: 50px; right: 50px;">
+        <img src="/static/Final_Network.png" alt="Network Graph" style="max-width: 2200px; max-height: 2200px;" onerror="this.onerror=null; this.alt='Image not found';">
+    </div>
+    <script>
+        const pathText = "{{ path|safe }}";
+        if (pathText) {
+            document.getElementById('outputBox').value = pathText;
+        }
+    </script>    
+</body>
+</html>
